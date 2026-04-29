@@ -1,0 +1,6 @@
+{
+  "name": "Kannada Shorts: AI News",
+  "description": "A modern Kannada short-news app with AI summarization, vertical swipe navigation, and real-time finance updates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["AI Summarization", "Real-time News", "Stock Market Tracking"]
+}

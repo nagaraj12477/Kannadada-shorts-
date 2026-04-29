@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "NewsStory": {
+      "title": "News Story",
+      "description": "A short news story in Kannada.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string", "description": "50-80 words summary in Kannada" },
+        "imageUrl": { "type": "string", "format": "uri" },
+        "originalUrl": { "type": "string", "format": "uri" },
+        "source": { "type": "string" },
+        "category": { "type": "string", "enum": ["my_feed", "finance", "timelines", "insights", "videos"] },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "trendingScore": { "type": "number" },
+        "videoUrl": { "type": "string", "format": "uri", "description": "Optional URL for video news" }
+      },
+      "required": ["title", "content", "publishedAt", "category"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "User preferences and bookmarks.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "bookmarks": { "type": "array", "items": { "type": "string" } },
+        "interests": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["email"]
+    },
+    "Stock": {
+      "title": "Stock Data",
+      "description": "Financial data for NSE/BSE stocks.",
+      "type": "object",
+      "properties": {
+        "symbol": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "change": { "type": "number" },
+        "changePercent": { "type": "number" },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": { "type": "string" },
+              "price": { "type": "number" }
+            }
+          }
+        }
+      },
+      "required": ["symbol", "price"]
+    }
+  },
+  "firestore": {
+    "/news/{newsId}": {
+      "schema": "NewsStory",
+      "description": "Public news stories."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Private user profiles."
+    },
+    "/stocks/{stockId}": {
+      "schema": "Stock",
+      "description": "Real-time stock updates."
+    }
+  }
+}
